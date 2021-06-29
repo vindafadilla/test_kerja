@@ -1,0 +1,13 @@
+SELECT * FROM customer WHERE gender="female";
+
+SELECT a.first_name, a.last_name, COUNT(c.sku) AS jumlah_order_item
+FROM customer a
+LEFT JOIN order_table b on a.id=b.fk_customer
+LEFT JOIN order_item c on b.id=c.fk_order
+GROUP BY a.first_name;
+
+SELECT a.id, a.first_name, a.last_name, a.gender, a.date_of_birth, a.city, SUM(b.sum) AS sum
+FROM customer a
+LEFT JOIN order_table b on a.id=b.fk_customer
+WHERE SUM IS NOT NULL 
+GROUP BY a.first_name;
